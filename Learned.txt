@@ -1,0 +1,9 @@
+php artisan make:controller Task -r
+
+-r is resource which help make common routes automatically (CRUD)
+
+php artisan make:model Task -m
+
+-m is migrate
+
+php artisan make:request StoreUserRequest
