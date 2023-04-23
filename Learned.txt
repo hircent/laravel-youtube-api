@@ -11,3 +11,43 @@ php artisan make:model Task -m
 -m is migrate
 
 php artisan make:request StoreUserRequest
+
+
+=================================================================
+
+php artisan make:factory TaskFactory
+
+Tinker is for evelopers to interactively execute PHP code and run database queries within the context of their Laravel application.
+
+php artisan tinker 
+
+User::factory()->times(50)->create();
+
+App\Models\Task::factory()->times(250)->create();
+
+================================================================
+
+This resource class can be used to transform and format data returned by the model into a JSON API response.
+
+php artisan make:resource TasksResource
+
+
+===============================================================
+
+if want set expiration of token:
+
+config\sanctum.php
+
+but sanctum suggest delete with schedule in app\console\kernel.php
+
+protected function schedule(Schedule $schedule): void
+    {
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
+    }
+
+check schedule
+
+php artisan schedule:list
+
+start work schedule
+php artisan schedule:work

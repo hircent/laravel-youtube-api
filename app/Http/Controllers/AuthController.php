@@ -9,11 +9,12 @@ use App\Traits\HttpResponses;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Models\User;
-
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthController extends Controller
 {
     use HttpResponses;
+    use HasApiTokens;
 
     public function login(LoginUserRequest $request){
         // no need $request->validated($request->all());
@@ -52,6 +53,10 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        return response()->json('logout');
+        Auth::user()->currentAccessToken()->delete();
+
+        return $this->success([
+            'message' => 'You have successfully been logout and token has been deleted.'
+        ]);
     }
 }
